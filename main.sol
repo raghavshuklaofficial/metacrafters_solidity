@@ -15,17 +15,24 @@ pragma solidity 0.8.18;
        to the amount that is supposed to be burned.
 */
 
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.18;
+
 contract MyToken {
     // Public variables
     string public tokenName;
     string public tokenAbbrv;
-    uint public totalSupply;
+    uint256 public totalSupply;
 
     // Mapping of addresses to balances
-    mapping(address => uint) public balances;
+    mapping(address => uint256) public balances;
+
+    // Event to log mint and burn events
+    event Mint(address indexed to, uint256 value);
+    event Burn(address indexed from, uint256 value);
 
     // Constructor to initialize public variables
-    constructor(string memory _tokenName, string memory _tokenAbbrv, uint _initialSupply) {
+    constructor(string memory _tokenName, string memory _tokenAbbrv, uint256 _initialSupply) {
         tokenName = _tokenName;
         tokenAbbrv = _tokenAbbrv;
         totalSupply = _initialSupply;
@@ -33,17 +40,24 @@ contract MyToken {
     }
 
     // Mint function
-    function mint(address _to, uint _value) public {
+    function mint(address _to, uint256 _value) public {
+        require(_value > 0, "Mint value must be greater than zero");
+
         totalSupply += _value;
         balances[_to] += _value;
+
+        emit Mint(_to, _value);
     }
 
     // Burn function
-    function burn(address _from, uint _value) public {
+    function burn(address _from, uint256 _value) public {
+        require(_value > 0, "Burn value must be greater than zero");
         require(balances[_from] >= _value, "Insufficient balance to burn");
         require(totalSupply >= _value, "Insufficient total supply to burn");
 
         totalSupply -= _value;
         balances[_from] -= _value;
+
+        emit Burn(_from, _value);
     }
 }
