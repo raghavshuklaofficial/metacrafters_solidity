@@ -21,9 +21,9 @@ Interact with the contract using Ethereum wallet interfaces or web3 libraries.
 
 ## Help
 If you encounter any issues or have questions, feel free to reach out for assistance.
-   ```bash
-       npm run troubleshoot
-   ```bash
+```bash
+npm run troubleshoot
+ 
 
 ## Authors
 Raghav Shukla
