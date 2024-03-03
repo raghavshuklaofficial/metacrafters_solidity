@@ -10,7 +10,7 @@ An Ethereum-based token contract implemented in Solidity, providing functionalit
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/MyToken.git
+   git clone https://github.com/yourusername/main.sol
 2. Navigate to the project folder:
    ```bash
    cd MyToken
