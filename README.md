@@ -13,7 +13,7 @@ An Ethereum-based token contract implemented in Solidity, providing functionalit
    git clone https://github.com/yourusername/metacrafters_solidity.git
 2. Navigate to the project folder:
    ```bash
-   cd MyToken
+   cd metacrafters_solidity
 
 ## Executing program
 Deploy the smart contract on an Ethereum-compatible blockchain using tools like Remix or Truffle.
