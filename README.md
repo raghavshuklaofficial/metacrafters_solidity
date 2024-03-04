@@ -10,7 +10,7 @@ An Ethereum-based token contract implemented in Solidity, providing functionalit
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/metacrafters_solidity.git
+   git clone https://github.com/raghavshuklaofficial/metacrafters_solidity.git
 2. Navigate to the project folder:
    ```bash
    cd metacrafters_solidity
