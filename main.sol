@@ -15,49 +15,38 @@ pragma solidity 0.8.18;
        to the amount that is supposed to be burned.
 */
 
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
-
 contract MyToken {
-    // Public variables
-    string public tokenName;
-    string public tokenAbbrv;
-    uint256 public totalSupply;
+  // Public variables for token details
+  string public name;
+  string public symbol;
+  uint256 public totalSupply;
 
-    // Mapping of addresses to balances
-    mapping(address => uint256) public balances;
+  // Mapping for address to token balances
+  mapping(address => uint256) public balances;
 
-    // Event to log mint and burn events
-    event Mint(address indexed to, uint256 value);
-    event Burn(address indexed from, uint256 value);
+  // Event to log token transfer
+  event Transfer(address indexed from, address indexed to, uint256 value);
 
-    // Constructor to initialize public variables
-    constructor(string memory _tokenName, string memory _tokenAbbrv, uint256 _initialSupply) {
-        tokenName = _tokenName;
-        tokenAbbrv = _tokenAbbrv;
-        totalSupply = _initialSupply;
-        balances[msg.sender] = _initialSupply;
-    }
+  // Constructor to initialize token details
+  constructor(string memory _name, string memory _symbol, uint256 _initialSupply) {
+    name = _name;
+    symbol = _symbol;
+    totalSupply = _initialSupply;
+    balances[msg.sender] = totalSupply; // Allocate initial supply to deployer
+  }
 
-    // Mint function
-    function mint(address _to, uint256 _value) public {
-        require(_value > 0, "Mint value must be greater than zero");
+  // Function to mint new tokens
+  function mint(address recipient, uint256 value) public {
+    totalSupply += value;
+    balances[recipient] += value;
+    emit Transfer(address(0), recipient, value); // Log mint event
+  }
 
-        totalSupply += _value;
-        balances[_to] += _value;
-
-        emit Mint(_to, _value);
-    }
-
-    // Burn function
-    function burn(address _from, uint256 _value) public {
-        require(_value > 0, "Burn value must be greater than zero");
-        require(balances[_from] >= _value, "Insufficient balance to burn");
-        require(totalSupply >= _value, "Insufficient total supply to burn");
-
-        totalSupply -= _value;
-        balances[_from] -= _value;
-
-        emit Burn(_from, _value);
-    }
+  // Function to burn tokens
+  function burn(uint256 value) public {
+    require(balances[msg.sender] >= value, "Insufficient balance for burn");
+    totalSupply -= value;
+    balances[msg.sender] -= value;
+    emit Transfer(msg.sender, address(0), value); // Log burn event
+  }
 }
