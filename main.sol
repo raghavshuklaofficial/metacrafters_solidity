@@ -29,7 +29,7 @@ contract MyToken {
   mapping(address => uint256) public balances;
 
   // Constructor to set initial token details
-  constructor(string memory _name, string memory _symbol, uint256 _initialSupply) public {
+  constructor(string memory _name, string memory _symbol, uint256 _initialSupply) {
     name = _name;
     symbol = _symbol;
     totalSupply = _initialSupply;
