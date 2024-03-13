@@ -15,6 +15,9 @@ pragma solidity 0.8.18;
        to the amount that is supposed to be burned.
 */
 
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.18;
+
 contract MyToken {
 
   // Public variables for token details
@@ -24,6 +27,13 @@ contract MyToken {
 
   // Mapping for address to token balances
   mapping(address => uint256) public balances;
+
+  // Constructor to set initial token details
+  constructor(string memory _name, string memory _symbol, uint256 _initialSupply) public {
+    name = _name;
+    symbol = _symbol;
+    totalSupply = _initialSupply;
+  }
 
   // Mint function to create new tokens
   function mint(address recipient, uint256 amount) public {
