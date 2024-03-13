@@ -16,6 +16,7 @@ pragma solidity 0.8.18;
 */
 
 contract MyToken {
+
   // Public variables for token details
   string public name;
   string public symbol;
@@ -24,29 +25,16 @@ contract MyToken {
   // Mapping for address to token balances
   mapping(address => uint256) public balances;
 
-  // Event to log token transfer
-  event Transfer(address indexed from, address indexed to, uint256 value);
-
-  // Constructor to initialize token details
-  constructor(string memory _name, string memory _symbol, uint256 _initialSupply) {
-    name = _name;
-    symbol = _symbol;
-    totalSupply = _initialSupply;
-    balances[msg.sender] = totalSupply; // Allocate initial supply to deployer
+  // Mint function to create new tokens
+  function mint(address recipient, uint256 amount) public {
+    totalSupply += amount;
+    balances[recipient] += amount;
   }
 
-  // Function to mint new tokens
-  function mint(address recipient, uint256 value) public {
-    totalSupply += value;
-    balances[recipient] += value;
-    emit Transfer(address(0), recipient, value); // Log mint event
-  }
-
-  // Function to burn tokens
-  function burn(uint256 value) public {
-    require(balances[msg.sender] >= value, "Insufficient balance for burn");
-    totalSupply -= value;
-    balances[msg.sender] -= value;
-    emit Transfer(msg.sender, address(0), value); // Log burn event
+  // Burn function to destroy tokens
+  function burn(uint256 amount) public {
+    require(balances[msg.sender] >= amount, "Insufficient balance to burn");
+    totalSupply -= amount;
+    balances[msg.sender] -= amount;
   }
 }
