@@ -15,9 +15,6 @@ pragma solidity 0.8.18;
        to the amount that is supposed to be burned.
 */
 
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
-
 contract MyToken {
 
   // Public variables for token details
